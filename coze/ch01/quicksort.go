@@ -3,9 +3,11 @@ package ch01
 import "fmt"
 
 func Run_quicksort() {
-	var nums = []int{5, 2, 1, 3, 4, 7}
+	//var nums = []int{5, 2, 1, 3, 4, 7}
+	//var nums = []int{5, 2, 1, 6, 4, 7}
+	var nums = []int{9, 2, 1, 6, 4, 7}
 	//nums = quicksort(nums)
-	nums = quicksort2(nums)
+	quicksort2(nums)
 	fmt.Printf("%+v\n", nums)
 }
 
@@ -25,22 +27,32 @@ func quicksort(nums []int) []int {
 	return append(append(quicksort(low), pivot), quicksort(high)...)
 }
 
-func quicksort2(nums []int) []int {
+func quicksort2(nums []int) {
 	if len(nums) < 2 {
-		return nums
+		return
 	}
 	var pivot = nums[0]
 	var pos = 1
-
 	for j := len(nums) - 1; j > pos; j-- {
 		for nums[j] < pivot && pos < j {
 			swap(nums, pos, j)
 			pos++
 		}
+		//如果j位置的值更大的话，需要替换前面的一位
+		if pos == j && nums[j] > pivot {
+			pos--
+		}
 	}
-	swap(nums, pos, 0)
 
-	return append(append(quicksort2(nums[:pos]), nums[pos]), quicksort2(nums[pos+1:])...)
+	//把pivot移动到合适的位置
+	if nums[pos] < pivot {
+		swap(nums, pos, 0)
+	} else {
+		pos = 0
+	}
+
+	quicksort2(nums[:pos])
+	quicksort2(nums[pos+1:])
 }
 
 func swap(nums []int, i, j int) {
