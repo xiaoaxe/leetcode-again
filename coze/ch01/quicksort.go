@@ -13,16 +13,16 @@ func quicksort(nums []int) []int {
 	if len(nums) < 2 {
 		return nums
 	}
-	var pilot = nums[0]
+	var pivot = nums[0]
 	var low, high []int
 	for i := 1; i < len(nums); i++ {
-		if nums[i] < pilot {
+		if nums[i] < pivot {
 			low = append(low, nums[i])
-		} else if nums[i] > pilot {
+		} else if nums[i] > pivot {
 			high = append(high, nums[i])
 		}
 	}
-	return append(append(quicksort(low), pilot), quicksort(high)...)
+	return append(append(quicksort(low), pivot), quicksort(high)...)
 }
 
 func quicksort2(nums []int) []int {
@@ -38,9 +38,7 @@ func quicksort2(nums []int) []int {
 			pos++
 		}
 	}
-	if nums[pos] < pivot {
-		swap(nums, pos, 0)
-	}
+	swap(nums, pos, 0)
 
 	return append(append(quicksort2(nums[:pos]), nums[pos]), quicksort2(nums[pos+1:])...)
 }
