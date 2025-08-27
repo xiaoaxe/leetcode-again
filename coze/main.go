@@ -1,11 +1,19 @@
 package main
 
-import "fmt"
-import "github.com/xiaoaxe/leetcode-again/coze/ch01"
+import (
+	"fmt"
+
+	"github.com/xiaoaxe/leetcode-again/coze/ch01"
+)
+
+func run01() {
+	//ch01.Run_slice()
+	//ch01.Run_reverseList()
+	ch01.Run_quicksort()
+}
 
 func run() {
-	ch01.Hello()
-	ch01.Run_reverseList()
+	run01()
 }
 
 func main() {
